@@ -4,7 +4,7 @@ module InverseCaptcha exposing (..)
 calculate : String -> Int
 calculate entry =
     let
-        match a b =
+        mapConsecutiveNumber a b =
             if a == b then
                 Just a
             else
@@ -13,7 +13,7 @@ calculate entry =
         chars =
             String.split "" entry
     in
-        List.map2 match chars (shiftFirstToLast chars)
+        List.map2 mapConsecutiveNumber chars (shiftFirstToLast chars)
             |> List.filterMap identity
             |> List.map (String.toInt >> Result.toMaybe >> Maybe.withDefault 0)
             |> List.sum
